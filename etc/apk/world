@@ -1,0 +1,10 @@
+alpine-base
+openssh
+syslinux
+ewindow-scripts
+ewindow-core
+bridge
+mesa-dri-virtio
+mesa-dri-intel
+avahi
+peervpn
