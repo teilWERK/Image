@@ -1,6 +1,9 @@
+
 targetdir="$(pwd)"/rootfs
 img=alpine-x64.img
 apkovl=ewindow.apkovl.tar.gz
+
+tar czf $apkovl etc
 
 create_image_file() {
 	dd if=/dev/zero of="$img" bs=1024 count=1000000
@@ -45,13 +48,6 @@ cleanup() {
 	losetup -D
 }
 
-if [ $1 = "cleanup" ]; then
-	echo going into cleanup
-	cleanup
-	exit 0
-fi
-
-
 install() {
 	pkgs="alpine-base linux-vanilla ewindowui"
 
@@ -71,9 +67,18 @@ install() {
             $repoflags $pkgs </tmp/ovlfiles
 }
 
-prepare || exit 1
+doit() {
+	prepare || exit 1
+	#install
+	./setup-disk -k vanilla -o $apkovl -s 0 "$targetdir"
+#	chroot "$targetdir" /sbin/update-extlinux
+	syslinux -i /dev/mapper/loop0p1
+	dd if=/usr/share/syslinux/mbr.bin of="$img" conv=notrunc
+	cleanup
+}
 
-#setup-disk -k vanilla -o $apkovl -s 0 "$targetdir"
-install
-
-cleanup
+case $1 in
+	cleanup) cleanup;;
+	prepare) prepare;;
+	*) doit
+esac
