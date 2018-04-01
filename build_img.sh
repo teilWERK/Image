@@ -6,13 +6,13 @@ apkovl=ewindow.apkovl.tar.gz
 tar czf $apkovl etc
 
 create_image_file() {
-	dd if=/dev/zero of="$img" bs=1024 count=1000000
+	dd if=/dev/zero of="$img" bs=1024 count=2000000
 	cat << EOF | fdisk $img
 		n
 		p
 		1
 
-		+100M
+		+40M
 		n
 		p
 		2
@@ -31,7 +31,7 @@ prepare() {
 	mdev -s
 	kpartx -av "$img"
 	mdev -s
-	mkfs.vfat /dev/mapper/loop0p1
+	mkfs.vfat -F 32 /dev/mapper/loop0p1
 	mkfs.ext4 -F /dev/mapper/loop0p2
 	mount /dev/mapper/loop0p2 "$targetdir"
 	mkdir -p "$targetdir"/boot
@@ -39,11 +39,11 @@ prepare() {
 }
 
 cleanup() {
-	umount $targetdir/dev
-	umount $targetdir/proc
-	umount $targetdir/sys
-	umount $targetdir/boot
-	umount $targetdir
+	umount "$targetdir/dev"
+	umount "$targetdir/proc"
+	umount "$targetdir/sys"
+	umount "$targetdir/boot"
+	umount "$targetdir"
 	dmsetup remove_all
 	losetup -D
 }
@@ -72,12 +72,15 @@ doit() {
 	#install
 	./setup-disk -k vanilla -o $apkovl -s 0 "$targetdir"
 #	chroot "$targetdir" /sbin/update-extlinux
+	echo -e "ewindow\newindow" | chroot "$targetdir" passwd
+	sync # should fix this by separating umount and cleanup
 	syslinux -i /dev/mapper/loop0p1
 	dd if=/usr/share/syslinux/mbr.bin of="$img" conv=notrunc
 	cleanup
 }
 
 case $1 in
+#	inspect) # non-destructive prepare and mount
 	cleanup) cleanup;;
 	prepare) prepare;;
 	*) doit
