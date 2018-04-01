@@ -6,5 +6,9 @@ ewindow-core
 bridge
 mesa-dri-virtio
 mesa-dri-intel
+dbus
 avahi
 peervpn
+pulseaudio
+pulseaudio-webrtc
+udev
