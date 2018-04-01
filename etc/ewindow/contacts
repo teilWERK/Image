@@ -1,0 +1,12 @@
+#
+# SIP contacts
+#
+# Displayname <sip:user@domain>;addr-params
+#
+#  addr-params:
+#    ;presence={none,p2p}
+#    ;access={allow,block}
+#
+
+# "Test Echo Server" <sip:ewindow@gateway.ewindow.org>;presence=p2p
+
