@@ -7,8 +7,8 @@ call_local_timeout	15
 
 # Audio
 #audio_path		/usr/local/share/baresip
-audio_player		pulse,default
-audio_source		pulse,default
+audio_player		pulse,
+audio_source		pulse,
 #audio_alert		alsa,default
 audio_level		yes
 
