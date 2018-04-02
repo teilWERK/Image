@@ -14,3 +14,6 @@ iface tap0 inet manual
 auto br0
 iface br0 inet manual
 	bridge_ports tap0 eth1
+
+auto wlan0
+iface wlan0 inet dhcp

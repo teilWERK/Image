@@ -1,0 +1,2 @@
+WPACLI_OPTS="-a /etc/wpa_supplicant/wpa_cli.sh"
+

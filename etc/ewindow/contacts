@@ -8,5 +8,5 @@
 #    ;access={allow,block}
 #
 
-# "Test Echo Server" <sip:ewindow@gateway.ewindow.org>;presence=p2p
+"Loopback" <sip:ewindow@gateway.ewindow.org>;presence=p2p
 
