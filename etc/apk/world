@@ -1,8 +1,10 @@
 alpine-base
 openssh
+wpa_supplicant
 syslinux
 ewindow-scripts
 ewindow-core
+ttf-droid
 bridge
 mesa-dri-virtio
 mesa-dri-intel
@@ -11,4 +13,5 @@ avahi
 peervpn
 pulseaudio
 pulseaudio-webrtc
+pulseaudio-system
 udev
