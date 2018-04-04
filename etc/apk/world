@@ -12,6 +12,7 @@ dbus
 avahi
 peervpn
 pulseaudio
+pulseaudio-alsa
 pulseaudio-webrtc
 pulseaudio-system
 udev
