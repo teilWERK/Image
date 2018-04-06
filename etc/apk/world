@@ -15,4 +15,6 @@ pulseaudio
 pulseaudio-alsa
 pulseaudio-webrtc
 pulseaudio-system
+pulseaudio-tools
 udev
+xkeyboard-config
