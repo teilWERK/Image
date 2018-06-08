@@ -1,0 +1,8 @@
+#http://mirror.clarkson.edu/alpine//v3.7/main
+#http://dl-cdn.alpinelinux.org/alpine/v3.7/main
+#http://dl-cdn.alpinelinux.org/alpine/v3.7/community
+@edge http://dl-cdn.alpinelinux.org/alpine/edge/main
+@edge http://dl-cdn.alpinelinux.org/alpine/edge/community
+@edge http://dl-cdn.alpinelinux.org/alpine/edge/testing
+
+@ewindow http://alpine.ewindow.org/ewindow
