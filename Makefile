@@ -13,13 +13,13 @@ build:
 include hosts/$(HOST).mk
 endif
 
-ewindow.apkovl.tar.gz: build
+%.apkovl.tar.gz: build
 	name="$@"; \
 	make HOST=$${name%.apkovl.tar.gz} default
 
-sdcard.img: ewindow.apkovl.tar.gz
+sdcard.img: installer.apkovl.tar.gz
 	dd if=/dev/zero of=sdcard.img bs=1024 count=524288
-	utils/run-qemu.sh $$PWD/ewindow.apkovl.tar.gz
+	utils/run-qemu.sh $$PWD/installer.apkovl.tar.gz
 
 clean:
 	rm -rf tmp *.apkovl.tar.gz

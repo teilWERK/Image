@@ -1,5 +1,6 @@
-build: $(ETC)/local.d/installer
+build: $(ETC)/local.d/installer.start
 
-$(ETC)/network/interfaces: $(ETC)/runlevels/default/local
+$(ETC)/local.d/installer.start: cfg/local.d/installer.start
 	mkdir -p $(ETC)/local.d
 	cp cfg/local.d/installer.start $(ETC)/local.d
+	ln -sf /etc/init.d/local $(ETC)/runlevels/default

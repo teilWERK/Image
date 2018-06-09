@@ -28,8 +28,8 @@ cp "$bootdir"/initramfs-vanilla $initrd
 
 #append="console=ttyS0,115200 alpine_repo=${repo} modules=loop,squashfs,virtio_net modloop=${modloop} quiet"
 #append="console=ttyAMA0,115200 alpine_repo=${repo} modules=loop,squashfs,virtio_net modloop=${modloop} quiet"
-append="console=ttyAMA0,115200 alpine_repo=${repo} modules=loop,squashfs,virtio_net"
-#append="console=ttyAMA0,115200 modules=loop,squashfs,virtio_net modloop=${modloop}"
+append="console=ttyAMA0,115200 alpine_repo=${repo} modules=loop,squashfs,virtio_net,vfat,nls_utf8,nls_cp437,crc32c,ext4"
+#append="console=ttyAMA0,115200 modules=loop,squashfs,virtio_net modules=virtio_net,virtio_blk modloop=${modloop}"
 
 if [ -n "$overlay" ]; then
   append="$append apkovl=/${overlay##*/}"
@@ -38,9 +38,13 @@ fi
 qemu-system-arm -m 512 -boot n \
 	-machine virt -nographic -serial mon:stdio	\
 	-device virtio-net-device,netdev=net0 -netdev user,id=net0	\
-	-sd sdcard.img	\
   -kernel "$kernel" \
   -initrd "$initrd" \
-  -append "$append"
+  -append "$append" \
+  -drive if=none,file=sdcard.img,id=sdcard \
+  -device virtio-blk-device,drive=sdcard \
+#  -device virtio-blk-scsi,drive=sd \
+#	-sd sdcard.img	\
+
 
 rm "$kernel" "$initrd"

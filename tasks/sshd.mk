@@ -1,17 +1,7 @@
 PKGS += openssh mosh
 
-# I use urxvt, which requires extra terminfo
-PKGS += rxvt-unicode-terminfo
-
-SSH_CERT_VALIDITY ?= 52w
-
 build: $(ETC)/runlevels/default/sshd \
 	$(ETC)/ssh/sshd_config
-
-ifdef SECRETS
-build: $(ETC)/ssh/ssh_host_rsa_key \
-	$(ETC)/ssh/ssh_host_ed25519_key
-endif
 
 $(ETC)/ssh/sshd_config: $(ETC)/ssh/ca.pub
 	( cat cfg/ssh/sshd_config; echo "TrustedUserCAKeys /etc/ssh/ca.pub" ) > $(ETC)/ssh/sshd_config
