@@ -7,8 +7,6 @@ fail() {                                                                        
 
 apk fix || fail "failed to install remaining packages"
 
-bash
-
 device="/dev/vda"
 
 [ -n "$device" ] || fail "No device specified"

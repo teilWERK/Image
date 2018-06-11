@@ -1,7 +1,6 @@
 #!/bin/sh
 branch=latest-stable
 arch=armhf
-repo=http://dl-cdn.alpinelinux.org/alpine/${branch}/main
 flavor=vanilla
 overlay="$1"
 
@@ -10,8 +9,7 @@ overlay="$1"
 kernel=$(mktemp)
 initrd=$(mktemp)
 
-bootdir=/var/lib/lxc/alpine-armhf/rootfs/boot/
-#bootdir=armroot/boot/
+bootdir=tmp/alpine-rootfs/boot/
 
 #modloop="http://boot.alpinelinux.org/images/${branch}/${arch}/modloop-${flavor}"
 

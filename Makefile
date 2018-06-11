@@ -1,3 +1,5 @@
+ALPINE_LATEST_ROOTFS=http://dl-cdn.alpinelinux.org/alpine/edge/releases/armhf/alpine-uboot-3.8.0_rc1-armhf.tar.gz
+
 TRG=tmp/$(HOST)
 ETC=$(TRG)/etc
 
@@ -17,7 +19,12 @@ endif
 	name="$@"; \
 	make HOST=$${name%.apkovl.tar.gz} default
 
-sdcard.img: installer.apkovl.tar.gz
+tmp/alpine-rootfs:
+	mkdir -p tmp/alpine-rootfs
+	wget -P tmp -c $(ALPINE_LATEST_ROOTFS)
+	tar -C tmp/alpine-rootfs -xf tmp/alpine-uboot-3.8.0_rc1-armhf.tar.gz
+
+sdcard.img: installer.apkovl.tar.gz tmp/alpine-rootfs
 	dd if=/dev/zero of=sdcard.img bs=1024 count=524288
 	utils/run-qemu.sh $$PWD/installer.apkovl.tar.gz
 
