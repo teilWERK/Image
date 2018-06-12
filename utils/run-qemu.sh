@@ -1,6 +1,7 @@
 #!/bin/sh
 branch=latest-stable
 arch=armhf
+repo=http://dl-cdn.alpinelinux.org/alpine/${branch}/main
 flavor=vanilla
 overlay="$1"
 

@@ -7,7 +7,7 @@ ETC=$(TRG)/etc
 
 ifdef HOST
 default: build
-	tar -c -C "$(TRG)" etc | gzip -9n > $(HOST).apkovl.tar.gz
+	tar -c -C "$(TRG)" boot etc | gzip -9n > $(HOST).apkovl.tar.gz
 
 build:
 	true
