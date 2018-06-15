@@ -19,14 +19,12 @@ endif
 	name="$@"; \
 	make HOST=$${name%.apkovl.tar.gz} default
 
-tmp/alpine-rootfs:
-	mkdir -p tmp/alpine-rootfs
-	wget -P tmp -c $(ALPINE_LATEST_ROOTFS)
-	tar -C tmp/alpine-rootfs -xf tmp/alpine-uboot-3.8.0_rc1-armhf.tar.gz
-
-sdcard.img: installer.apkovl.tar.gz tmp/alpine-rootfs
-	dd if=/dev/zero of=sdcard.img bs=1024 count=524288
-	utils/run-qemu.sh $$PWD/installer.apkovl.tar.gz
+sdcard.img: installer.apkovl.tar.gz
+#	dd if=/dev/zero of=sdcard.img bs=1024 count=524288
+#	utils/run-qemu.sh $$PWD/installer.apkovl.tar.gz sdcard.img
+	sudo chmod 777 /dev/mmcblk0
+	utils/run-qemu.sh $$PWD/installer.apkovl.tar.gz /dev/mmcblk0
 
 clean:
 	rm -rf tmp *.apkovl.tar.gz
+

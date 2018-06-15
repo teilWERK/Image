@@ -3,3 +3,4 @@ http://dl-cdn.alpinelinux.org/alpine/edge/community
 http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 http://alpine.ewindow.org/ewindow
+@git http://alpine.ewindow.org/git

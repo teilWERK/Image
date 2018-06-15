@@ -1,10 +1,11 @@
-build: $(ETC)/local.d/installer.start $(ETC)/inittab
+build: $(ETC)/installer.sh $(ETC)/inittab
 
-$(ETC)/local.d/installer.start: cfg/local.d/installer.start
+$(ETC)/installer.sh: cfg/installer.sh
 	mkdir -p $(ETC)/local.d
-	cp cfg/local.d/installer.start $(ETC)/local.d
-#	ln -sf /etc/init.d/local $(ETC)/runlevels/default
+	cp cfg/installer.sh $(ETC)/
 
 $(ETC)/inittab:
-	echo "ttyAMA0::respawn:/etc/local.d/installer.start" > $(ETC)/inittab
-
+	echo "ttyAMA0::once:/etc/installer.sh" >> $(ETC)/inittab
+	echo "::sysinit:/sbin/openrc sysinit" >> $(ETC)/inittab
+	echo "::sysinit:/sbin/openrc boot" >> $(ETC)/inittab
+	echo "::wait:/sbin/openrc default" >> $(ETC)/inittab
